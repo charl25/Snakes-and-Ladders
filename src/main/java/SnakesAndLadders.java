@@ -4,6 +4,7 @@ public class SnakesAndLadders {
 
     HashMap<String, Integer> player = new HashMap<>(); // list of players and they positions on the board
     HashMap<String, Integer> playerStatus = new HashMap<>(); // multiplayer states
+    int dieTose;
 
     public SnakesAndLadders(int mode){
 
@@ -16,14 +17,14 @@ public class SnakesAndLadders {
 
     public void throwDie(int playing){
             String player = "player" +playing;
-            int dieTose = (int)(Math.random()*6)+1;
-            System.out.println("die :"+dieTose);
+             this.dieTose = (int)(Math.random()*6)+1;
+            System.out.println("die :"+this.dieTose);
             switch (this.playerStatus.get(player)){
                 case 1:
-                    play(player,dieTose);
+                    play(player,this.dieTose);
                     break;
                 case 0:
-                    if(dieTose == 6){
+                    if(this.dieTose == 6){
                         this.playerStatus.replace(player,1);
                     }
                     break;
@@ -88,8 +89,8 @@ public class SnakesAndLadders {
 
 
     public void position(String player){
-        if(this.player.get(player)>=100){
-            System.out.println(player +" has completed");
+        if(gameState(player)){
+            System.out.println(player +" has won the game");
             this.playerStatus.replace(player,0);
         }else{
             System.out.println(player+" at " +this.player.get(player));
@@ -98,6 +99,22 @@ public class SnakesAndLadders {
 
     public int playersList(){
         return this.player.size();
+    }
+
+    public int getTose(){
+        return this.dieTose;
+    }
+
+    public boolean gameState(String player){
+        int position = this.player.get(player);
+        if(position == 100){
+            return true;
+        }else if(position>100){
+            int newPosition = 100-(position -100);
+            this.player.replace(player,newPosition);
+            return false;
+        }
+        return  false;
     }
 
 }

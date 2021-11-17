@@ -13,6 +13,7 @@ public class main {
         boolean exit = true;
 
         while(exit){
+
             for (int i = 1; i <=player; i++) {
 
                 System.out.println("type play");
@@ -20,8 +21,9 @@ public class main {
                 String[] action = move.split(" ");
 
                 switch (action[0]) {
-                    case "play":
+                    case "p":
                         game.throwDie(i);
+                        if(game.getTose() == 6) i--;
                         break;
                     case "exit":
                         exit = false;
