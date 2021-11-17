@@ -36,9 +36,6 @@ public class SnakesAndLadders {
     public void play(String player, int moves){
         int position = this.player.get(player)+moves;
 
-        //checks if the player is sitting on the same position as another player, and removes the player which was there first
-        samePosition(this.player,position);
-
         switch (position){
             case 1:
                 this.player.replace(player,38);
@@ -89,6 +86,10 @@ public class SnakesAndLadders {
                 this.player.replace(player,position);
                 break;
         }
+
+        //checks if the player is sitting on the same position as another player, and removes the player which was there first
+        if(this.player.get(player) !=0)samePosition(this.player,this.player.get(player)...................);
+
     }
 
     public void position(String player){
