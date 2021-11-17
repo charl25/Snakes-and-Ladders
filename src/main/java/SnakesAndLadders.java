@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class SnakesAndLadders {
 
@@ -34,6 +35,9 @@ public class SnakesAndLadders {
 
     public void play(String player, int moves){
         int position = this.player.get(player)+moves;
+
+        //checks if the player is sitting on the same position as another player, and removes the player which was there first
+        samePosition(this.player,position);
 
         switch (position){
             case 1:
@@ -87,7 +91,6 @@ public class SnakesAndLadders {
         }
     }
 
-
     public void position(String player){
         if(gameState(player)){
             System.out.println(player +" has won the game");
@@ -115,6 +118,20 @@ public class SnakesAndLadders {
             return false;
         }
         return  false;
+    }
+
+    //code below is a trial of a player getting kicked by another and they have to restart in the game
+
+    public  <K, V> void samePosition(Map<K, V> map, V value){
+        for (Map.Entry<K, V> entry: map.entrySet())
+        {
+            if (value.equals(entry.getValue())) {
+                String restartPlayer = (String) entry.getKey();
+                this.player.replace(restartPlayer,0);
+                this.playerStatus.replace(restartPlayer,0);
+                System.out.println(restartPlayer+" has been knocked to the start");
+            }
+        }
     }
 
 }
